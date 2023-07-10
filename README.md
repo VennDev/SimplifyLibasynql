@@ -98,7 +98,7 @@ self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
 ```php
 # `users` is name table and `100` is primary key.
 self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
-    SimplifyLibasynql::update("users", [
+    self::$simplifyLibasynql->update("users", [
         "id" => $result["id"],
         "name" => "VennVDev",
         "age" => $result["age"]
