@@ -51,3 +51,15 @@ SimplifyLibasynql::fetchAll("users")->then(function($result) {
 SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
   var_dump($result);
 });
+```
+# Mixing method
+- You can change data when use function fetchData.
+```php
+SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
+    SimplifyLibasynql::update("users", [
+        "id" => $result["id"],
+        "name" => "VennVDev",
+        "age" => $result["age"]
+    ]);
+});
+```
