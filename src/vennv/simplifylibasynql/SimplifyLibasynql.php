@@ -36,9 +36,11 @@ final class SimplifyLibasynql
 
     private DataConnector $database;
 
-    public function register(DataConnector $database) : void
+    public function register(DataConnector $database) : SimplifyLibasynql
     {
         $this->database = $database;
+
+        return $this;
     }
 
     public function getDatabase() : DataConnector
