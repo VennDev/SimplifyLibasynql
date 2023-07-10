@@ -42,6 +42,7 @@ SimplifyLibasynql::removeTable("users");
 ```
 
 # How to get All data or a data in the table ?
+- First, you need to understand what asynchrony is. and how to deal with the Vapm library. [Vapm](https://github.com/VennDev/Vapm/blob/main/README.md)
 ```php
 SimplifyLibasynql::fetchAll("users")->then(function($result) {
   var_dump($result);
