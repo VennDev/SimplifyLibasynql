@@ -25,52 +25,30 @@
 namespace vennv\simplifylibasynql;
 
 use Exception;
-use pocketmine\plugin\PluginBase;
 use poggit\libasynql\DataConnector;
-use poggit\libasynql\libasynql;
 use vennv\Promise;
 use Throwable;
 
-final class SimplifyLibasynql extends PluginBase
+final class SimplifyLibasynql
 {
 
     private const MAX_LENGTH_TYPE_LONG_TEXT = 4294967295;
 
-    private static DataConnector $database;
+    private DataConnector $database;
 
-    /**
-     * @throws Throwable
-     */
-    protected function onEnable() : void
+    public function register(DataConnector $database) : void
     {
-        $this->saveDefaultConfig();
-
-        self::$database = libasynql::create($this, $this->getConfig()->get("database"), [
-            "mysql" => "mysql.sql",
-            "sqlite" => "sqlite.sql"
-        ]);
-
-        self::$database->executeGeneric("init_tables");
-        self::$database->executeGeneric("init_data_handler");
-		self::$database->waitAll();
+        $this->database = $database;
     }
 
-    protected function onDisable() : void
+    public function getDatabase() : DataConnector
     {
-        if (isset(self::$database)) 
-        {
-            self::$database->close();
-        }
+        return $this->database;
     }
 
-    public static function getDatabase() : DataConnector
+    public function addTable(string $name, array $value) : void
     {
-        return self::$database;
-    }
-
-    public static function addTable(string $name, array $value) : void
-    {
-        self::$database->executeSelect("get_tables", [], function(array $rows) use ($name, $value)
+        $this->database->executeSelect("get_tables", [], function(array $rows) use ($name, $value)
         {
             $havePrimaryKey = false;
             foreach ($value as $case => $data)
@@ -94,7 +72,7 @@ final class SimplifyLibasynql extends PluginBase
 
             if (!in_array($name, $rows))
             {
-                self::$database->executeInsert(
+                $this->database->executeInsert(
                     "add_table", [
                         "name" => $name,
                         "data" => json_encode($value)
@@ -112,15 +90,15 @@ final class SimplifyLibasynql extends PluginBase
         });
     }
 
-    public static function updateTable(string $name, array $value) : void
+    public function updateTable(string $name, array $value) : void
     {
-        self::$database->executeSelect("get_tables", [], function(array $rows) use ($name, $value)
+        $this->database->executeSelect("get_tables", [], function(array $rows) use ($name, $value)
         {
             $rows = array_column($rows, "name");
 
             if (in_array($name, $rows))
             {
-                self::$database->executeChange(
+                $this->database->executeChange(
                     "update_table", [
                         "name" => $name,
                         "data" => json_encode($value)
@@ -134,9 +112,9 @@ final class SimplifyLibasynql extends PluginBase
         });
     }
 
-    public static function updateDataHandler(array $handler) : void
+    public function updateDataHandler(array $handler) : void
     {
-        self::$database->executeSelect("get_data_handler", [], function(array $rows) use ($handler)
+        $this->database->executeSelect("get_data_handler", [], function(array $rows) use ($handler)
         {
             $array = array_keys($rows);
             $keyEnd = end($array);
@@ -158,7 +136,7 @@ final class SimplifyLibasynql extends PluginBase
 
                 if ($length >= self::MAX_LENGTH_TYPE_LONG_TEXT)
                 {
-                    self::$database->executeInsert(
+                    $this->database->executeInsert(
                         "add_data_handler", [
                             "id" => $keyEnd + 1,
                             "data" => $encodeData
@@ -167,7 +145,7 @@ final class SimplifyLibasynql extends PluginBase
                 }
                 else
                 {
-                    self::$database->executeChange(
+                    $this->database->executeChange(
                         "update_data_handler", [
                             "id" => $keyEnd,
                             "data" => $dataAfterAdd
@@ -177,7 +155,7 @@ final class SimplifyLibasynql extends PluginBase
             }
             else
             {
-                self::$database->executeInsert(
+                $this->database->executeInsert(
                     "add_data_handler", [
                         "id" => 0,
                         "data" => json_encode($handler)
@@ -187,9 +165,9 @@ final class SimplifyLibasynql extends PluginBase
         });
     }
 
-    public static function update(string $tableName, array $data) : void
+    public function update(string $tableName, array $data) : void
     {
-        self::$database->executeSelect("get_tables", [], function(array $rows) use ($tableName, $data)
+        $this->database->executeSelect("get_tables", [], function(array $rows) use ($tableName, $data)
         {
             $dataTables = [];
 
@@ -230,9 +208,9 @@ final class SimplifyLibasynql extends PluginBase
         });
     }
 
-    public static function removeDataTable(string $tableName, string $primaryKey) : void
+    public function removeDataTable(string $tableName, string $primaryKey) : void
     {
-        self::$database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $primaryKey)
+        $this->database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $primaryKey)
         {
             foreach ($rows as $key => $data)
             {
@@ -242,7 +220,7 @@ final class SimplifyLibasynql extends PluginBase
                 {
                     unset($dataHandler[$tableName][$primaryKey]);
 
-                    self::$database->executeChange(
+                    $this->database->executeChange(
                         "update_data_handler", [
                             "id" => $key,
                             "data" => json_encode($dataHandler)
@@ -253,9 +231,9 @@ final class SimplifyLibasynql extends PluginBase
         });
     }
 
-    public static function removeTable(string $tableName) : void
+    public function removeTable(string $tableName) : void
     {
-        self::$database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName)
+        $this->database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName)
         {
             foreach ($rows as $key => $data)
             {
@@ -265,7 +243,7 @@ final class SimplifyLibasynql extends PluginBase
                 {
                     unset($dataHandler[$tableName]);
 
-                    self::$database->executeChange(
+                    $this->database->executeChange(
                         "update_data_handler", [
                             "id" => $key,
                             "data" => json_encode($dataHandler)
@@ -279,11 +257,11 @@ final class SimplifyLibasynql extends PluginBase
     /**
      * @throws Throwable
      */
-    public static function fetchData(string $tableName, string $primaryKey) : Promise
+    public function fetchData(string $tableName, string $primaryKey) : Promise
     {
         return new Promise(function($resolve, $reject) use ($tableName, $primaryKey)
         {
-            self::$database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $primaryKey, $resolve, $reject)
+            $this->database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $primaryKey, $resolve, $reject)
             {
                 $result = [];
 
@@ -307,11 +285,11 @@ final class SimplifyLibasynql extends PluginBase
     /**
      * @throws Throwable
      */
-    public static function fetchAll(string $tableName) : Promise
+    public function fetchAll(string $tableName) : Promise
     {
         return new Promise(function($resolve, $reject) use ($tableName)
         {
-            self::$database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $resolve, $reject)
+            $this->database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $resolve, $reject)
             {
                 $result = [];
 
