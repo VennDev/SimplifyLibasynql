@@ -1,0 +1,9 @@
+name: SimplifyLibasynql
+version: 1.0.0
+api: 5.0.0
+php: 
+  - 8.0
+  - 8.1
+  - 8.2
+antigen: vennv\simplifylibasynql
+author: VennV 
