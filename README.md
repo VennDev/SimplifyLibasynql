@@ -1,4 +1,4 @@
-# SimplifyLibasynql [STILL-DEV]
+# SimplifyLibasynql
 - A Library for PocketMine-PMMP, A Library that helps you create DataBase easily through the 3rd library [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql)
 
 # How to install ?
