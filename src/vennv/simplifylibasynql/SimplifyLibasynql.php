@@ -226,6 +226,12 @@ final class SimplifyLibasynql
                             "data" => json_encode($dataHandler)
                         ]
                     );
+
+                    $this->database->executeChange(
+                        "delete_table", [
+                            "name" => $tableName
+                        ]
+                    );
                 }
             }
         });
