@@ -5,11 +5,4 @@ projects:
   SimplifyLibasynql:
     model: virion
     type: library
-    libs:
-      - src: VennDev/VapmPMMP/VapmPMMP
-        version: ^1.0
-        epitope: .random
-      - src: poggit/libasynql/libasynql
-        version: ^4.2
-        epitope: .random
 ...
