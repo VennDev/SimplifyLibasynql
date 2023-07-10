@@ -92,7 +92,7 @@ final class SimplifyLibasynql extends PluginBase
              */
             $rows = array_column($rows, "name");
 
-            if (!isset($rows[$name]))
+            if (!in_array($name, $rows))
             {
                 self::$database->executeInsert(
                     "add_table", [
@@ -104,6 +104,10 @@ final class SimplifyLibasynql extends PluginBase
                 self::updateDataHandler([
                     $name => []
                 ]);
+            }
+            else
+            {
+                throw new Exception("Table already exists!");
             }
         });
     }
