@@ -24,6 +24,7 @@ SimplifyLibasynql::addTable("users", [
 ```
 
 # How to Insert/Update a column in the table ?
+- It's all in the same way ``update``.
 ```php
 SimplifyLibasynql::update("users", [
     "id" => 100,
