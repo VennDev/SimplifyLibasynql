@@ -28,6 +28,12 @@ INSERT INTO tables (name, data)
 VALUES (:name, :data);
 -- #}
 
+-- #{ delete_table
+-- #	:name string
+DELETE FROM tables
+WHERE name = :name;
+-- #}
+
 -- #{ update_table
 -- #	:name string
 -- #	:data string
