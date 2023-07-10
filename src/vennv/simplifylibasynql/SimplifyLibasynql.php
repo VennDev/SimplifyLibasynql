@@ -277,18 +277,20 @@ final class SimplifyLibasynql extends PluginBase
         {
             self::$database->executeSelect("get_data_handler", [], function(array $rows) use ($tableName, $primaryKey, $resolve, $reject)
             {
+                $result = [];
+
                 foreach ($rows as $data)
                 {
-                    $data = json_decode($data["data"], true);
+                    $result = array_merge(json_decode($data["data"], true), $result);
+                }
 
-                    if (isset($data[$tableName][$primaryKey]))
-                    {
-                        $resolve($data[$tableName][$primaryKey]);
-                    }
-                    else
-                    {
-                        $reject(false);
-                    }
+                if (isset($result[$tableName][$primaryKey]))
+                {
+                    $resolve($result[$tableName][$primaryKey]);
+                }
+                else
+                {
+                    $reject(false);
                 }
             });
         });
