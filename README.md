@@ -2,7 +2,7 @@
 - One plugin for PocketMine-PMMP, Help you create a database through the 3rd library [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql)
 
 # How to install ?
-- You need install: [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql) & [LibVapmPMMP](https://poggit.pmmp.io/ci/VennDev/VapmPMMP/VapmPMMP) & [VapmRunable](https://poggit.pmmp.io/ci/VennDev/VapmRunable/VapmRunable)
+- You need install: [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql) & [LibVapmPMMP](https://poggit.pmmp.io/ci/VennDev/VapmPMMP/VapmPMMP) & plugin [VapmRunable](https://poggit.pmmp.io/ci/VennDev/VapmRunable/VapmRunable)
 - Then you just need to run, install and customize your configuration in the plugin's data folder.
 
 # Good to know !
