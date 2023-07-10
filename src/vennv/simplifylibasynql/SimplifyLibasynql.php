@@ -86,6 +86,10 @@ final class SimplifyLibasynql extends PluginBase
                 throw new Exception("You must have a primary key!");
             }
 
+            /**
+             * @var string $case
+             * @var string $data
+             */
             $rows = array_column($rows, "name");
 
             if (!isset($rows[$name]))
