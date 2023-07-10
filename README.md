@@ -15,7 +15,8 @@ use vennv\simplifylibasynql\TypeData;
 ```
 # How to setup for your plugin ?
 - This is plugin example: [Example](https://github.com/VennDev/SimplifyLibasynql/tree/main/Examples/Test)
-- You need to configure your plugin to have all the data of all files in the template folder I added here [Folder](https://github.com/VennDev/SimplifyLibasynql/tree/main/SQL)
+- Just take everything in this [Folder](https://github.com/VennDev/SimplifyLibasynql/tree/main/SQL) and bring in your plugin configuration.
+- Note: don't change any details in files like mysql.sql or sqlite.sql if you don't understand them or how this library works!
 - Class registration creation template for libraries:
 ```php
 private static DataConnector $database;
