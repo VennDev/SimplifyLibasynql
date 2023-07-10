@@ -6,6 +6,7 @@ use pocketmine\plugin\PluginBase;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 use Throwable;
+use vennv\VapmPMMP;
 use vennv\Async;
 use vennv\Promise;
 use vennv\simplifylibasynql\SimplifyLibasynql;
@@ -13,7 +14,6 @@ use vennv\simplifylibasynql\TypeData;
 
 final class Test extends PluginBase
 {
-
     private static DataConnector $database;
     private static SimplifyLibasynql $simplifyLibasynql;
 
@@ -22,6 +22,8 @@ final class Test extends PluginBase
      */
     protected function onEnable() : void
     {
+		VapmPMMP::init($this);
+		
         $this->saveDefaultConfig();
 
         self::$database = libasynql::create($this, $this->getConfig()->get("database"), [
@@ -35,12 +37,6 @@ final class Test extends PluginBase
 
         self::$simplifyLibasynql = new SimplifyLibasynql();
         self::$simplifyLibasynql->register(self::$database);
-
-        self::$simplifyLibasynql->addTable("users", [
-            "id" => TypeData::PRIMARY_KEY,
-            "name" => "",
-            "age" => 0
-        ]);
     }
 
     protected function onDisable() : void
