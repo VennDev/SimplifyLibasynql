@@ -59,6 +59,7 @@ SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
 });
 ```
 # Mixing method
+- To get to this level, you need to watch the steps above.
 - You can change data when use function fetchData.
 ```php
 SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
