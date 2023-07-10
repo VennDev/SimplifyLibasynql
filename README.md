@@ -14,11 +14,38 @@ use vennv\simplifylibasynql\SimplifyLibasynql;
 use vennv\simplifylibasynql\TypeData;
 ```
 # How to setup for your plugin ?
-- 
+- You need to configure your plugin to have all the data of all files in the template folder I added here [Folder](https://github.com/VennDev/SimplifyLibasynql/tree/main/SQL)
+- Class registration creation template for libraries:
+```php
+protected function onEnable() : void
+{
+    $this->saveDefaultConfig();
+
+    self::$database = libasynql::create($this, $this->getConfig()->get("database"), [
+        "mysql" => "mysql.sql",
+        "sqlite" => "sqlite.sql"
+    ]);
+
+    self::$database->executeGeneric("init_tables");
+    self::$database->executeGeneric("init_data_handler");
+    self::$database->waitAll();
+
+    self::$simplifyLibasynql = new SimplifyLibasynql();
+    self::$simplifyLibasynql->register(self::$database);
+}
+
+protected function onDisable() : void
+{
+    if (isset(self::$database)) 
+    {
+        self::$database->close();
+    }
+}
+```
 
 # How to create table ?
 ```php
-SimplifyLibasynql::addTable("users", [
+self::$simplifyLibasynql->addTable("users", [
     "id" => TypeData::PRIMARY_KEY,
     "name" => "",
     "age" => 0
@@ -28,7 +55,7 @@ SimplifyLibasynql::addTable("users", [
 # How to Insert/Update a column in the table ?
 - It's all in the same way ``update``.
 ```php
-SimplifyLibasynql::update("users", [
+self::$simplifyLibasynql->update("users", [
     "id" => 100,
     "name" => "VennV",
     "age" => 20
@@ -38,12 +65,12 @@ SimplifyLibasynql::update("users", [
 # How to remove a column in the table ?
 ```php
 # `users` is name table and `100` is primary key.
-SimplifyLibasynql::removeDataTable("users", 100);
+self::$simplifyLibasynql->removeDataTable("users", 100);
 ```
 - Or remove tables
 ```php
 # `users` is name table.
-SimplifyLibasynql::removeTable("users");
+self::$simplifyLibasynql->removeTable("users");
 ```
 
 # How to get All data or a data in the table ?
@@ -51,7 +78,7 @@ SimplifyLibasynql::removeTable("users");
 - With PocketMine-PMMP you don't need the method ``endSingleJob`` or ``endMultiJobs``, because you already have plugins that handle them that are: [VapmRunable](https://poggit.pmmp.io/ci/VennDev/VapmRunable/VapmRunable)
 ```php
 # `users` is name table.
-SimplifyLibasynql::fetchAll("users")->then(function($result) {
+self::$simplifyLibasynql->fetchAll("users")->then(function($result) {
   var_dump($result);
 })->catch(function($error) {
   var_dump($error);
@@ -59,7 +86,7 @@ SimplifyLibasynql::fetchAll("users")->then(function($result) {
 ```
 ```php
 # `users` is name table and `100` is primary key.
-SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
+self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
   var_dump($result);
 })->catch(function($error) {
   var_dump($error);
@@ -70,7 +97,7 @@ SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
 - You can change data when use function fetchData.
 ```php
 # `users` is name table and `100` is primary key.
-SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
+self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
     SimplifyLibasynql::update("users", [
         "id" => $result["id"],
         "name" => "VennVDev",
