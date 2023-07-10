@@ -3,7 +3,7 @@ build-by-default: true
 branches:
 - main
 projects:
-  SimplifyLibasync:
+  SimplifyLibasynql:
     path: ""
     libs:
       - src: VennDev/VapmPMMP/VapmPMMP
