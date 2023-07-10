@@ -46,6 +46,7 @@ SimplifyLibasynql::removeTable("users");
 SimplifyLibasynql::fetchAll("users")->then(function($result) {
   var_dump($result);
 });
+```
 ```php
 SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
   var_dump($result);
