@@ -45,11 +45,15 @@ SimplifyLibasynql::removeTable("users");
 ```php
 SimplifyLibasynql::fetchAll("users")->then(function($result) {
   var_dump($result);
+})->catch(function($error) {
+  var_dump($error);
 });
 ```
 ```php
 SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
   var_dump($result);
+})->catch(function($error) {
+  var_dump($error);
 });
 ```
 # Mixing method
@@ -61,5 +65,7 @@ SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
         "name" => "VennVDev",
         "age" => $result["age"]
     ]);
+})->catch(function($error) {
+  var_dump($error);
 });
 ```
