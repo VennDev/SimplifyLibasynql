@@ -35,10 +35,12 @@ SimplifyLibasynql::update("users", [
 
 # How to remove a column in the table ?
 ```php
+# `users` is name table and `100` is primary key.
 SimplifyLibasynql::removeDataTable("users", 100);
 ```
 - Or remove tables
 ```php
+# `users` is name table.
 SimplifyLibasynql::removeTable("users");
 ```
 
@@ -46,6 +48,7 @@ SimplifyLibasynql::removeTable("users");
 - First, you need to understand what asynchrony is. and how to deal with the [Vapm](https://github.com/VennDev/Vapm/blob/main/README.md) library.
 - With PocketMine-PMMP you don't need the method ``endSingleJob`` or ``endMultiJobs``, because you already have plugins that handle them that are: [VapmRunable](https://poggit.pmmp.io/ci/VennDev/VapmRunable/VapmRunable)
 ```php
+# `users` is name table.
 SimplifyLibasynql::fetchAll("users")->then(function($result) {
   var_dump($result);
 })->catch(function($error) {
@@ -53,6 +56,7 @@ SimplifyLibasynql::fetchAll("users")->then(function($result) {
 });
 ```
 ```php
+# `users` is name table and `100` is primary key.
 SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
   var_dump($result);
 })->catch(function($error) {
@@ -63,6 +67,7 @@ SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
 - To get to this level, you need to watch the steps above.
 - You can change data when use function fetchData.
 ```php
+# `users` is name table and `100` is primary key.
 SimplifyLibasynql::fetchData("users", 100)->then(function($result) {
     SimplifyLibasynql::update("users", [
         "id" => $result["id"],
