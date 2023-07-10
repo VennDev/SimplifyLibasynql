@@ -7,6 +7,7 @@
 
 # Good to know !
 - First, you need to know a few paths to create plugin methods.
+- Code:
 ```php
 use vennv\VapmPMMP;
 use vennv\Promise;
@@ -51,6 +52,7 @@ protected function onDisable() : void
 ```
 
 # How to create table ?
+- Code:
 ```php
 self::$simplifyLibasynql->addTable("users", [
     "id" => TypeData::PRIMARY_KEY,
@@ -61,6 +63,7 @@ self::$simplifyLibasynql->addTable("users", [
 
 # How to Insert/Update a column in the table ?
 - It's all in the same way ``update``.
+- Code:
 ```php
 self::$simplifyLibasynql->update("users", [
     "id" => 100,
@@ -70,6 +73,7 @@ self::$simplifyLibasynql->update("users", [
 ```
 
 # How to remove a column in the table ?
+- Code:
 ```php
 # `users` is name table and `100` is primary key.
 self::$simplifyLibasynql->removeDataTable("users", 100);
@@ -84,6 +88,7 @@ self::$simplifyLibasynql->removeTable("users");
 - First, you need to understand what asynchrony is. and how to deal with the [Vapm](https://github.com/VennDev/Vapm/blob/main/README.md) library.
 - With PocketMine-PMMP you don't need the method endSingleJob or endMultiJobs, because you already have `VapmPMMP::init($this);`
 - But if you do not understand what that method is for, [click here](https://github.com/VennDev/VapmPMMP#how-to-setup-)
+- Code:
 ```php
 # `users` is name table.
 self::$simplifyLibasynql->fetchAll("users")->then(function($result) {
@@ -92,6 +97,7 @@ self::$simplifyLibasynql->fetchAll("users")->then(function($result) {
   var_dump($error);
 });
 ```
+- Code:
 ```php
 # `users` is name table and `100` is primary key.
 self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
@@ -103,6 +109,7 @@ self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
 # Mixing method
 - To get to this level, you need to watch the steps above.
 - You can change data when use function fetchData.
+- Code:
 ```php
 # `users` is name table and `100` is primary key.
 self::$simplifyLibasynql->fetchData("users", 100)->then(function($result) {
