@@ -83,10 +83,6 @@ final class SimplifyLibasynql
                     $name => []
                 ]);
             }
-            else
-            {
-                throw new Exception("Table already exists!");
-            }
         });
     }
 
