@@ -2,13 +2,13 @@
 
 namespace vennv\Test;
 
+use Throwable;
 use pocketmine\plugin\PluginBase;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
-use Throwable;
-use vennv\VapmPMMP;
-use vennv\Async;
-use vennv\Promise;
+use vennv\vapm\VapmPMMP;
+use vennv\vapm\Async;
+use vennv\vapm\Promise;
 use vennv\simplifylibasynql\SimplifyLibasynql;
 use vennv\simplifylibasynql\TypeData;
 
