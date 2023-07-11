@@ -22,7 +22,7 @@ final class Test extends PluginBase
      */
     protected function onEnable() : void
     {
-		VapmPMMP::init($this);
+	VapmPMMP::init($this);
 		
         $this->saveDefaultConfig();
 
