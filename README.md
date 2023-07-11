@@ -2,7 +2,7 @@
 - A Library for PocketMine-PMMP, A Library that helps you create DataBase easily through the 3rd library [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql)
 
 # How to install ?
-- You need install: [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql) & [LibVapmPMMP](https://poggit.pmmp.io/ci/VennDev/VapmPMMP/VapmPMMP)
+- You need install: [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql) & [LibVapmPMMP](https://poggit.pmmp.io/ci/VennDev/LibVapmPMMP/LibVapmPMMP)
 - Then you just need to run, install and customize your configuration in the plugin's data folder.
 
 # Good to know !
@@ -87,7 +87,7 @@ self::$simplifyLibasynql->removeTable("users");
 # How to get All data or a data in the table ?
 - First, you need to understand what asynchrony is. and how to deal with the [Vapm](https://github.com/VennDev/Vapm/blob/main/README.md) library.
 - With PocketMine-PMMP you don't need the method endSingleJob or endMultiJobs, because you already have `VapmPMMP::init($this);`
-- But if you do not understand what that method is for, [click here](https://github.com/VennDev/VapmPMMP#how-to-setup-)
+- But if you do not understand what that method is for, [click here](https://github.com/VennDev/LibVapmPMMP#how-to-setup-)
 - Code:
 ```php
 # `users` is name table.
