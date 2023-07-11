@@ -86,7 +86,7 @@ self::$simplifyLibasynql->removeTable("users");
 
 # How to get All data or a data in the table ?
 - First, you need to understand what asynchrony is. and how to deal with the [Vapm](https://github.com/VennDev/Vapm/blob/main/README.md) library.
-- With PocketMine-PMMP you don't need the method endSingleJob or endMultiJobs, because you already have `VapmPMMP::init($this);`
+- With PocketMine-PMMP you don't need the method runEventLoop() or runSingleEventLoop(), because you already have `VapmPMMP::init($this);`
 - But if you do not understand what that method is for, [click here](https://github.com/VennDev/LibVapmPMMP#how-to-setup-)
 - Code:
 ```php
