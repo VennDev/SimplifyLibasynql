@@ -9,9 +9,9 @@
 - First, you need to know a few paths to create plugin methods.
 - Code:
 ```php
-use vennv\VapmPMMP;
-use vennv\Promise;
-use vennv\Async;
+use vennv\vapm\VapmPMMP;
+use vennv\vapm\Promise;
+use vennv\vapm\Async;
 use vennv\simplifylibasynql\SimplifyLibasynql;
 use vennv\simplifylibasynql\TypeData;
 ```
