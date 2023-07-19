@@ -2,7 +2,7 @@
 - A Library for PocketMine-PMMP, A Library that helps you create DataBase easily through the 3rd library [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql)
 
 # How to install ?
-- You need install: [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql) & [LibVapmPMMP](https://poggit.pmmp.io/ci/VennDev/LibVapmPMMP/LibVapmPMMP)
+- You need install: [Libasynql](https://poggit.pmmp.io/ci/poggit/libasynql/libasynql) & [LibVapmPMMP](https://github.com/VennDev/LibVapmPMMP/releases)
 - Then you just need to run, install and customize your configuration in the plugin's data folder.
 
 # Good to know !
