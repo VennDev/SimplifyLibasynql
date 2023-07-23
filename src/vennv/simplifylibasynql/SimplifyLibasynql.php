@@ -26,7 +26,7 @@ namespace vennv\simplifylibasynql;
 
 use Exception;
 use poggit\libasynql\DataConnector;
-use vennv\Promise;
+use vennv\vapm\Promise;
 use Throwable;
 
 final class SimplifyLibasynql
